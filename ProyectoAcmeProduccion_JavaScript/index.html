@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ACME · Gestión de producción</title>
+  <meta name="description" content="Sistema de gestión de producción para la planta de ACME en Macondo." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app-root"></div>
+  <ui-toast></ui-toast>
+
+  <!-- Capa de datos -->
+  <script src="js/store.js"></script>
+
+  <!-- Web Components reutilizables -->
+  <script src="js/components/ui-modal.js"></script>
+  <script src="js/components/ui-toast.js"></script>
+  <script src="js/components/stock-badge.js"></script>
+  <script src="js/components/batch-ticket.js"></script>
+  <script src="js/components/app-sidebar.js"></script>
+
+  <!-- Vistas / módulos -->
+  <script src="js/views/login-view.js"></script>
+  <script src="js/views/users-view.js"></script>
+  <script src="js/views/inventory-view.js"></script>
+  <script src="js/views/production-view.js"></script>
+
+  <!-- Enrutador y arranque -->
+  <script src="js/app.js"></script>
+</body>
+</html>

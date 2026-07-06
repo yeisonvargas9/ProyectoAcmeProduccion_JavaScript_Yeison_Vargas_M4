@@ -1,0 +1,430 @@
+/* ==========================================================================
+   ACME · Gestión de producción — Sistema de diseño
+   Paleta: papel de bodega + tinta + latón industrial
+   Tipografía: Space Grotesk (display) / IBM Plex Sans (cuerpo) / IBM Plex Mono (datos)
+   ========================================================================== */
+
+:root {
+  --bg: #f2efe7;
+  --surface: #fffdf9;
+  --ink: #1f2421;
+  --ink-soft: #6b6a63;
+  --line: #ded7c6;
+  --brass: #b08d57;
+  --brass-dark: #8f7040;
+  --rust: #b54834;
+  --moss: #4b6350;
+
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  --radius: 4px;
+  --shadow-soft: 0 2px 10px rgba(31, 36, 33, 0.06);
+  --shadow-lift: 0 16px 34px rgba(31, 36, 33, 0.14);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app-root { min-height: 100vh; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  margin: 0 0 0.3rem;
+  color: var(--ink);
+}
+
+p { line-height: 1.55; }
+
+button { font-family: inherit; }
+
+a { color: var(--brass-dark); }
+
+::selection { background: var(--brass); color: #fff; }
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+/* ---------- Utilidades ---------- */
+
+.mono { font-family: var(--font-mono); }
+.muted { color: var(--ink-soft); }
+.stack { display: flex; flex-direction: column; gap: 1rem; }
+
+/* ---------- Layout general de la app autenticada ---------- */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+.app-aside {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.app-main {
+  padding: 2.4rem 3rem 4rem;
+  max-width: 1180px;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .app-aside { position: relative; height: auto; }
+  .app-main { padding: 1.4rem 1.2rem 3rem; }
+}
+
+/* ---------- Encabezado de vista ---------- */
+
+.view-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+  margin-bottom: 0.35rem;
+}
+
+.view-head h1 { font-size: 1.65rem; }
+.lead { color: var(--ink-soft); max-width: 60ch; margin: 0.4rem 0 0; font-size: 0.93rem; }
+
+/* ---------- Paneles ---------- */
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 2.4rem 1rem;
+  text-align: center;
+  align-items: center;
+  color: var(--ink-soft);
+}
+.empty-state strong { color: var(--ink); font-family: var(--font-display); font-size: 1.05rem; }
+
+/* ---------- Botones ---------- */
+
+.btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.86rem;
+  padding: 0.62rem 1.15rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.06s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn-block { width: 100%; }
+.btn-small { padding: 0.42rem 0.75rem; font-size: 0.78rem; }
+
+.btn-primary {
+  background: var(--ink);
+  color: #f7f5f1;
+  border-color: var(--ink);
+}
+.btn-primary:hover { background: #343931; }
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border-color: var(--line);
+}
+.btn-outline:hover { border-color: var(--brass); color: var(--brass-dark); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border-color: transparent;
+}
+.btn-ghost:hover { background: var(--bg); }
+
+.btn-danger {
+  background: var(--rust);
+  color: #fff;
+  border-color: var(--rust);
+}
+.btn-danger:hover { background: #973a29; }
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-btn:hover { border-color: var(--brass); color: var(--brass-dark); }
+.icon-btn.danger:hover { border-color: var(--rust); color: var(--rust); background: #fbeeeb; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--brass-dark);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.row-actions { display: flex; gap: 0.4rem; align-items: center; justify-content: flex-end; }
+
+/* ---------- Formularios ---------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  flex: 1;
+}
+
+.field input,
+.field select {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 400;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+.field input:focus, .field select:focus {
+  border-color: var(--brass);
+}
+
+.field-row { display: flex; gap: 1rem; }
+@media (max-width: 520px) { .field-row { flex-direction: column; } }
+
+.field-error {
+  color: var(--rust);
+  font-size: 0.82rem;
+  margin: 0;
+  min-height: 0;
+}
+.field-error:empty { display: none; }
+
+.field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+/* Filas dinámicas: ingredientes de fórmula / productos a fabricar */
+
+.ingredient-row, .production-row {
+  display: grid;
+  grid-template-columns: 1fr 110px 40px 34px;
+  gap: 0.6rem;
+  align-items: center;
+}
+.ingredient-row select, .production-row select,
+.ingredient-row input, .production-row input {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+@media (max-width: 560px) {
+  .ingredient-row, .production-row { grid-template-columns: 1fr; }
+}
+
+/* ---------- Tabla de datos ---------- */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.data-table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 0.6rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+}
+.data-table td {
+  padding: 0.75rem 0.7rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: #faf8f2; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+.tag-brass { background: #f1e6d3; color: var(--brass-dark); }
+.tag-moss { background: #e2ebe3; color: var(--moss); }
+
+.formula-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.formula-list li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ---------- Toolbar / buscador ---------- */
+
+.toolbar { margin-bottom: 1.1rem; }
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.55rem 0.8rem;
+  background: var(--bg);
+  max-width: 420px;
+  color: var(--ink-soft);
+}
+.search-field input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.88rem;
+  width: 100%;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Pantalla de login
+   ========================================================================== */
+
+.auth-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.2rem;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(176,141,87,0.10), transparent 45%),
+    radial-gradient(circle at 85% 80%, rgba(75,99,80,0.10), transparent 45%),
+    var(--bg);
+}
+
+.auth-card {
+  display: flex;
+  max-width: 460px;
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: var(--shadow-lift);
+  overflow: hidden;
+}
+
+.auth-ticket-strip {
+  width: 14px;
+  flex-shrink: 0;
+  background: repeating-linear-gradient(180deg, var(--brass) 0 14px, transparent 14px 28px);
+}
+
+.auth-content { padding: 2.4rem 2.2rem; width: 100%; }
+
+.auth-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass-dark);
+  margin-bottom: 0.6rem;
+}
+
+.auth-title {
+  font-size: 1.6rem;
+  line-height: 1.15;
+  margin-bottom: 0.7rem;
+}
+
+.auth-copy {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  margin: 0 0 1.6rem;
+}
+
+.auth-hint {
+  margin-top: 1.4rem;
+  padding: 0.7rem 0.9rem;
+  background: var(--bg);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 480px) {
+  .auth-content { padding: 1.8rem 1.4rem; }
+  .auth-title { font-size: 1.35rem; }
+}
