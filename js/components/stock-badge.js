@@ -14,13 +14,14 @@ class StockBadge extends HTMLElement {
   }
 
   render() {
-    const stock = parseFloat(this.getAttribute('stock') || '0');
+    const rawStock = parseFloat(this.getAttribute('stock'));
+    const stock = Number.isFinite(rawStock) ? rawStock : 0;
     const umbral = parseFloat(this.getAttribute('umbral') || '10');
     const unidad = this.getAttribute('unidad') || '';
     let level = 'ok';
     if (stock <= 0) level = 'empty';
     else if (stock <= umbral) level = 'low';
-
+  
     const colors = {
       ok: 'var(--moss, #4b6350)',
       low: 'var(--brass, #b08d57)',
@@ -31,7 +32,7 @@ class StockBadge extends HTMLElement {
       low: 'Stock bajo',
       empty: 'Agotado',
     };
-
+  
     this.shadowRoot.innerHTML = `
       <style>
         :host { display: inline-flex; align-items:center; gap: 0.4rem; font-family: var(--font-mono, monospace); }

@@ -193,9 +193,18 @@ class UsersView extends HTMLElement {
       const identificacion = isEdit ? user.identificacion : (data.get('identificacion') || '').trim();
       const nombre = (data.get('nombre') || '').trim();
       const cargo = data.get('cargo');
-      const password = data.get('password') || '';
-      const password2 = data.get('password2') || '';
+      const password = (data.get('password') || '').trim();
+      const password2 = (data.get('password2') || '').trim();
 
+      if (!isEdit && !identificacion) {
+        errorEl.textContent = 'El número de identificación no puede estar vacío.';
+        return;
+      }
+      
+      if (!nombre) {
+        errorEl.textContent = 'El nombre completo no puede estar vacío ni contener solo espacios.';
+        return;
+      }
       if (!cargo) {
         errorEl.textContent = 'Selecciona un cargo.';
         return;

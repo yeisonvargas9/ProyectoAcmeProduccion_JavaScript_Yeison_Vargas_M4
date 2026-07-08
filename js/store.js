@@ -33,7 +33,9 @@ const fbPatchRoot = (updates) =>
   fbRequest('', { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(updates) });
 
 function toArray(obj) {
-  return obj ? Object.values(obj) : [];
+  if (!obj) return [];
+  const values = Array.isArray(obj) ? obj : Object.values(obj);
+  return values.filter((v) => v !== null && v !== undefined);
 }
 
 const INVALID_KEY_CHARS = /[.#$\[\]/]/;
@@ -211,10 +213,11 @@ const ProductsAPI = {
     return product;
   },
   async increaseStock(codigo, cantidad) {
-    if (cantidad <= 0) throw new Error('La cantidad a ingresar debe ser mayor que cero.');
+    if (!cantidad || cantidad <= 0) throw new Error('La cantidad a ingresar debe ser mayor que cero.');
     const product = await this.findByCodigo(codigo);
     if (!product) throw new Error('Producto no encontrado.');
-    product.stock += cantidad;
+    const currentStock = Number.isFinite(product.stock) ? product.stock : 0;
+    product.stock = currentStock + cantidad;
     await fbSet(`products/${codigo}`, product);
     return product;
   },
