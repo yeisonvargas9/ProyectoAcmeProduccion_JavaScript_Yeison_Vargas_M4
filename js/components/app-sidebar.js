@@ -20,6 +20,7 @@ class AppSidebar extends HTMLElement {
       { route: 'inventario', label: 'Inventario', icon: this.iconInventory() },
       { route: 'produccion', label: 'Producción', icon: this.iconProduction() },
       { route: 'usuarios', label: 'Usuarios', icon: this.iconUsers() },
+      { route: 'reportes', label: 'Reportes', icon: this.iconReports() },
     ];
 
     this.shadowRoot.innerHTML = `
@@ -122,6 +123,9 @@ class AppSidebar extends HTMLElement {
   }
   iconUsers() {
     return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><circle cx="17.5" cy="8.5" r="2.4"/><path d="M16 14.2c2.6.4 4.5 2.3 4.5 5.3"/></svg>`;
+  }
+  iconReports() {
+    return `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg>`;
   }
 }
 

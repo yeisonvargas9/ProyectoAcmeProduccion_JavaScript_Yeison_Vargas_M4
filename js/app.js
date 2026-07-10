@@ -33,6 +33,7 @@
     inventario: 'inventory-view',
     produccion: 'production-view',
     usuarios: 'users-view',
+    reportes: 'reports-view',
   };
 
   function renderLogin() {

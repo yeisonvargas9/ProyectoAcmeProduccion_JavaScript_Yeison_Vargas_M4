@@ -315,8 +315,38 @@ const ProductionAPI = {
     await fbPatchRoot(updates);
     return registro;
   },
-};
 
+async reporteMateriaPrima(anio, mes) {
+  const producciones = await this.list();
+  const consumo = {};
+
+  producciones.forEach((registro) => {
+    const fecha = new Date(registro.fecha);
+    if (fecha.getFullYear() === anio && fecha.getMonth() + 1 === mes) {
+      registro.items.forEach((item) => {
+        item.materiaUsada.forEach((m) => {
+          if (!consumo[m.codigo]) {
+            consumo[m.codigo] = { codigo: m.codigo, cantidad: 0, unidad: m.unidad };
+          }
+          consumo[m.codigo].cantidad += m.cantidad;
+        });
+      });
+    }
+  });
+
+  const productos = await ProductsAPI.list();
+  const nombrePorCodigo = Object.fromEntries(productos.map((p) => [p.codigo, p.nombre]));
+
+  return Object.values(consumo)
+    .map((c) => ({
+      codigo: c.codigo,
+      nombre: nombrePorCodigo[c.codigo] || c.codigo,
+      cantidad: c.cantidad,
+      unidad: c.unidad,
+    }))
+    .sort((a, b) => a.nombre.localeCompare(b.nombre));
+},
+};
 window.AcmeStore = {
   FIREBASE_BASE_URL,
   seedIfEmpty,

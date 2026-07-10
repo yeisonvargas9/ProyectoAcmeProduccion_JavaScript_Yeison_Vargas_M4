@@ -193,8 +193,10 @@ class UsersView extends HTMLElement {
       const identificacion = isEdit ? user.identificacion : (data.get('identificacion') || '').trim();
       const nombre = (data.get('nombre') || '').trim();
       const cargo = data.get('cargo');
-      const password = (data.get('password') || '').trim();
-      const password2 = (data.get('password2') || '').trim();
+      const password_Edit = data.get('password') || '';
+      const password2_Edit = data.get('password2') || '';
+      const password = password_Edit.trim();
+      const password2 = password2_Edit.trim();
 
       if (!isEdit && !identificacion) {
         errorEl.textContent = 'El número de identificación no puede estar vacío.';
@@ -210,9 +212,9 @@ class UsersView extends HTMLElement {
         return;
       }
 
-      if (!isEdit || password) {
+      if (!isEdit || password_Edit) {
         if (password.length < 6) {
-          errorEl.textContent = 'La contraseña debe tener al menos 6 caracteres.';
+          errorEl.textContent = "La contraseña debe tener mínimo 6 caracteres. No es válida si está compuesta únicamente por espacios.";
           return;
         }
         if (password !== password2) {
